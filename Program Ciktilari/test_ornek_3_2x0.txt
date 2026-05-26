@@ -1,0 +1,95 @@
+Test Girdisi: 10 * 0
+==================================================
+
+#################################################################
+    ZORUNLU TASARIM GEREKSİNİMİ: OPERAND AYRIŞTIRMA RAPORU    
+#################################################################
+Turing Makinesi bant üzerindeki verileri aşağıdaki kurallara göre ayrıştırır:
+  1. '*' karakteri iki sayıyı (multiplicand ve multiplier) ayırmak için kullanılır.
+  2. '=' karakteri hesaplama sonucunun yazılacağı alanın başlangıcını belirtir.
+
+Bant Ayrıştırma Analizi:
+  - Tam Bant Girdisi       : 10*0=
+  - Ayraç (*) Konumu       : Indeks 2
+  - *'ın Sol Tarafı        : '10' -> Birinci Sayı (Multiplicand)
+  - *'ın Sağ Tarafı        : '0' -> İkinci Sayı (Multiplier)
+  - Sonuç Alanı İşareti    : Indeks 4 (= karakterinden sonrası)
+-----------------------------------------------------------------
+Makine işlem boyunca bu ayrımı açık şekilde koruyacak ve her adımda
+ilgili operand sınırlarını (*) referans alarak işlem yapacaktır.
+#################################################################
+
+--- 11. ADIM ADIM SİMÜLASYON ÇIKTISI BAŞLIYOR ---
+Adım 0:
+  Mevcut Durum    : q_baslangic
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 10*0=
+                    ^
+--------------------------------------------------
+Adım 1:
+  Mevcut Durum    : q_baslangic
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 10*0=
+                     ^
+  Açıklama        : Bant üzerinde * karakterini bulmak üzere sağa ilerleniyor.
+--------------------------------------------------
+Adım 2:
+  Mevcut Durum    : q_baslangic
+  Okunan Sembol   : *
+  Yazılacak Sembol: *
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 10*0=
+                      ^
+  Açıklama        : Ayraç (*) bulundu. Sol taraf birinci sayı olarak ayrıştırıldı.
+--------------------------------------------------
+Adım 3:
+  Mevcut Durum    : q_yildiz_bulundu
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 10*0=
+                       ^
+  Açıklama        : İkinci sayı taranıyor, sonuç alanını belirten = aranıyor.
+--------------------------------------------------
+Adım 4:
+  Mevcut Durum    : q_yildiz_bulundu
+  Okunan Sembol   : =
+  Yazılacak Sembol: =
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 10*0=
+                        ^
+  Açıklama        : = karakteri bulundu. Çarpma işlemi için çarpanın en sağ bitine gidiliyor.
+--------------------------------------------------
+Adım 5:
+  Mevcut Durum    : q_isle_bit_0
+  Okunan Sembol   : 0
+  Yazılacak Sembol: X
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 10*0=
+                       ^
+  Açıklama        : Çarpanın sağdan 1. biti '0' okundu. Toplama yapılmayacak. 1. sayı bant üzerinde fiziksel olarak sola kaydırılacak.
+--------------------------------------------------
+Adım 6:
+  Mevcut Durum    : q_sola_git_0
+  Okunan Sembol   : *
+  Yazılacak Sembol: *
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 10*X=
+                      ^
+  Açıklama        : Operand ayrımı (*) teyit edildi. Tüm bitler işlendi, çarpma tamamlandı (q_kabul).
+--------------------------------------------------
+--- SİMÜLASYON BİTTİ ---
+
+=======================================================
+                      SONUÇ EKRANI                     
+=======================================================
+  Binary Sonuç  : 0
+  Decimal Sonuç : 0
+-------------------------------------------------------
+  Açıklama: 10₂ (2) × 0₂ (0) = 0₂ (0)
+=======================================================
+

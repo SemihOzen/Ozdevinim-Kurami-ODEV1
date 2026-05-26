@@ -1,0 +1,465 @@
+Test Girdisi: 100 * 11
+==================================================
+
+#################################################################
+    ZORUNLU TASARIM GEREKSİNİMİ: OPERAND AYRIŞTIRMA RAPORU    
+#################################################################
+Turing Makinesi bant üzerindeki verileri aşağıdaki kurallara göre ayrıştırır:
+  1. '*' karakteri iki sayıyı (multiplicand ve multiplier) ayırmak için kullanılır.
+  2. '=' karakteri hesaplama sonucunun yazılacağı alanın başlangıcını belirtir.
+
+Bant Ayrıştırma Analizi:
+  - Tam Bant Girdisi       : 100*11=
+  - Ayraç (*) Konumu       : Indeks 3
+  - *'ın Sol Tarafı        : '100' -> Birinci Sayı (Multiplicand)
+  - *'ın Sağ Tarafı        : '11' -> İkinci Sayı (Multiplier)
+  - Sonuç Alanı İşareti    : Indeks 6 (= karakterinden sonrası)
+-----------------------------------------------------------------
+Makine işlem boyunca bu ayrımı açık şekilde koruyacak ve her adımda
+ilgili operand sınırlarını (*) referans alarak işlem yapacaktır.
+#################################################################
+
+--- 11. ADIM ADIM SİMÜLASYON ÇIKTISI BAŞLIYOR ---
+Adım 0:
+  Mevcut Durum    : q_baslangic
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*11=
+                    ^
+--------------------------------------------------
+Adım 1:
+  Mevcut Durum    : q_baslangic
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*11=
+                     ^
+  Açıklama        : Bant üzerinde * karakterini bulmak üzere sağa ilerleniyor.
+--------------------------------------------------
+Adım 2:
+  Mevcut Durum    : q_baslangic
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*11=
+                      ^
+  Açıklama        : Bant üzerinde * karakterini bulmak üzere sağa ilerleniyor.
+--------------------------------------------------
+Adım 3:
+  Mevcut Durum    : q_baslangic
+  Okunan Sembol   : *
+  Yazılacak Sembol: *
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*11=
+                       ^
+  Açıklama        : Ayraç (*) bulundu. Sol taraf birinci sayı olarak ayrıştırıldı.
+--------------------------------------------------
+Adım 4:
+  Mevcut Durum    : q_yildiz_bulundu
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*11=
+                        ^
+--------------------------------------------------
+Adım 5:
+  Mevcut Durum    : q_yildiz_bulundu
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*11=
+                         ^
+--------------------------------------------------
+Adım 6:
+  Mevcut Durum    : q_yildiz_bulundu
+  Okunan Sembol   : =
+  Yazılacak Sembol: =
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*11=
+                          ^
+  Açıklama        : = karakteri bulundu. Çarpma işlemi için çarpanın en sağ bitine gidiliyor.
+--------------------------------------------------
+Adım 7:
+  Mevcut Durum    : q_isle_bit_0
+  Okunan Sembol   : 1
+  Yazılacak Sembol: Y
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*11=
+                         ^
+  Açıklama        : Çarpanın sağdan 1. biti '1' okundu. 1. sayı (100) kopyalanır ve sola kaydırılarak toplama eklenir.
+--------------------------------------------------
+Adım 8:
+  Mevcut Durum    : q_sola_git_kontrol_0
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=
+                        ^
+--------------------------------------------------
+Adım 9:
+  Mevcut Durum    : q_sola_git_kontrol_0
+  Okunan Sembol   : *
+  Yazılacak Sembol: *
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*1Y=
+                       ^
+  Açıklama        : Operand ayrımı (*) teyit edildi. Sonuç alanına (= sağına) ilerleniyor.
+--------------------------------------------------
+Adım 10:
+  Mevcut Durum    : q_sonuca_git_0
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*1Y=
+                        ^
+--------------------------------------------------
+Adım 11:
+  Mevcut Durum    : q_sonuca_git_0
+  Okunan Sembol   : Y
+  Yazılacak Sembol: Y
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*1Y=
+                         ^
+--------------------------------------------------
+Adım 12:
+  Mevcut Durum    : q_sonuca_git_0
+  Okunan Sembol   : =
+  Yazılacak Sembol: =
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*1Y=
+                          ^
+  Açıklama        : Sonuç alanına ulaşıldı. 1. sayı kopyalanıp toplama eklendi. Güncel Toplam = 100 yazılıyor...
+--------------------------------------------------
+Adım 13:
+  Mevcut Durum    : q_yaz_0_0
+  Okunan Sembol   : B
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*1Y=B
+                           ^
+--------------------------------------------------
+Adım 14:
+  Mevcut Durum    : q_yaz_0_1
+  Okunan Sembol   : B
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*1Y=1B
+                            ^
+--------------------------------------------------
+Adım 15:
+  Mevcut Durum    : q_yaz_0_2
+  Okunan Sembol   : B
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 100*1Y=10B
+                             ^
+--------------------------------------------------
+Adım 16:
+  Mevcut Durum    : q_yaz_0_3
+  Okunan Sembol   : B
+  Yazılacak Sembol: B
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100B
+                              ^
+  Açıklama        : Sonuç yazıldı. Sıradaki çarpan bitini bulmak için sola dönülüyor.
+--------------------------------------------------
+Adım 17:
+  Mevcut Durum    : q_sonuc_donus_0
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                             ^
+--------------------------------------------------
+Adım 18:
+  Mevcut Durum    : q_sonuc_donus_0
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                            ^
+--------------------------------------------------
+Adım 19:
+  Mevcut Durum    : q_sonuc_donus_0
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                           ^
+--------------------------------------------------
+Adım 20:
+  Mevcut Durum    : q_sonuc_donus_0
+  Okunan Sembol   : =
+  Yazılacak Sembol: =
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                          ^
+--------------------------------------------------
+Adım 21:
+  Mevcut Durum    : q_carpan_bul_0
+  Okunan Sembol   : Y
+  Yazılacak Sembol: Y
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                         ^
+--------------------------------------------------
+Adım 22:
+  Mevcut Durum    : q_carpan_bul_0
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                        ^
+--------------------------------------------------
+Adım 23:
+  Mevcut Durum    : q_carpan_bul_0
+  Okunan Sembol   : *
+  Yazılacak Sembol: *
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                       ^
+  Açıklama        : Operand ayrımı (*) teyit edildi. 1. sayıyı bant üzerinde fiziksel olarak kaydırma işlemi başlıyor.
+--------------------------------------------------
+Adım 24:
+  Mevcut Durum    : q_shift_basla_0
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                      ^
+--------------------------------------------------
+Adım 25:
+  Mevcut Durum    : q_shift_elde_0_0
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                     ^
+--------------------------------------------------
+Adım 26:
+  Mevcut Durum    : q_shift_elde_0_0
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 100*1Y=100
+                    ^
+--------------------------------------------------
+Adım 27:
+  Mevcut Durum    : q_shift_elde_1_0
+  Okunan Sembol   : B
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : B000*1Y=100
+                    ^
+  Açıklama        : Fiziksel kaydırma işlemi bant üzerinde tamamlandı.
+--------------------------------------------------
+Adım 28:
+  Mevcut Durum    : q_shift_tamam_0
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*1Y=100
+                     ^
+--------------------------------------------------
+Adım 29:
+  Mevcut Durum    : q_shift_tamam_0
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*1Y=100
+                      ^
+--------------------------------------------------
+Adım 30:
+  Mevcut Durum    : q_shift_tamam_0
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*1Y=100
+                       ^
+--------------------------------------------------
+Adım 31:
+  Mevcut Durum    : q_shift_tamam_0
+  Okunan Sembol   : *
+  Yazılacak Sembol: *
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*1Y=100
+                        ^
+  Açıklama        : Sıradaki çarpan bitini bulmak için sağa ilerleniyor.
+--------------------------------------------------
+Adım 32:
+  Mevcut Durum    : q_saga_don_0
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*1Y=100
+                         ^
+--------------------------------------------------
+Adım 33:
+  Mevcut Durum    : q_saga_don_0
+  Okunan Sembol   : Y
+  Yazılacak Sembol: Y
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*1Y=100
+                          ^
+--------------------------------------------------
+Adım 34:
+  Mevcut Durum    : q_isle_bit_1
+  Okunan Sembol   : 1
+  Yazılacak Sembol: Y
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*1Y=100
+                         ^
+  Açıklama        : Çarpanın sağdan 2. biti '1' okundu. 1. sayı (1000) kopyalanır ve sola kaydırılarak toplama eklenir.
+--------------------------------------------------
+Adım 35:
+  Mevcut Durum    : q_sola_git_kontrol_1
+  Okunan Sembol   : *
+  Yazılacak Sembol: *
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*YY=100
+                        ^
+  Açıklama        : Operand ayrımı (*) teyit edildi. Sonuç alanına (= sağına) ilerleniyor.
+--------------------------------------------------
+Adım 36:
+  Mevcut Durum    : q_sonuca_git_1
+  Okunan Sembol   : Y
+  Yazılacak Sembol: Y
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*YY=100
+                         ^
+--------------------------------------------------
+Adım 37:
+  Mevcut Durum    : q_sonuca_git_1
+  Okunan Sembol   : Y
+  Yazılacak Sembol: Y
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*YY=100
+                          ^
+--------------------------------------------------
+Adım 38:
+  Mevcut Durum    : q_sonuca_git_1
+  Okunan Sembol   : =
+  Yazılacak Sembol: =
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*YY=100
+                           ^
+  Açıklama        : Sonuç alanına ulaşıldı. 1. sayı kopyalanıp toplama eklendi. Güncel Toplam = 1100 yazılıyor...
+--------------------------------------------------
+Adım 39:
+  Mevcut Durum    : q_yaz_1_0
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*YY=100
+                            ^
+--------------------------------------------------
+Adım 40:
+  Mevcut Durum    : q_yaz_1_1
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*YY=100
+                             ^
+--------------------------------------------------
+Adım 41:
+  Mevcut Durum    : q_yaz_1_2
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*YY=110
+                              ^
+--------------------------------------------------
+Adım 42:
+  Mevcut Durum    : q_yaz_1_3
+  Okunan Sembol   : B
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*YY=110B
+                               ^
+--------------------------------------------------
+Adım 43:
+  Mevcut Durum    : q_yaz_1_4
+  Okunan Sembol   : B
+  Yazılacak Sembol: B
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*YY=1100B
+                                ^
+  Açıklama        : Sonuç yazıldı. Sıradaki çarpan bitini bulmak için sola dönülüyor.
+--------------------------------------------------
+Adım 44:
+  Mevcut Durum    : q_sonuc_donus_1
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*YY=1100
+                               ^
+--------------------------------------------------
+Adım 45:
+  Mevcut Durum    : q_sonuc_donus_1
+  Okunan Sembol   : 0
+  Yazılacak Sembol: 0
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*YY=1100
+                              ^
+--------------------------------------------------
+Adım 46:
+  Mevcut Durum    : q_sonuc_donus_1
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*YY=1100
+                             ^
+--------------------------------------------------
+Adım 47:
+  Mevcut Durum    : q_sonuc_donus_1
+  Okunan Sembol   : 1
+  Yazılacak Sembol: 1
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*YY=1100
+                            ^
+--------------------------------------------------
+Adım 48:
+  Mevcut Durum    : q_sonuc_donus_1
+  Okunan Sembol   : =
+  Yazılacak Sembol: =
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*YY=1100
+                           ^
+--------------------------------------------------
+Adım 49:
+  Mevcut Durum    : q_carpan_bul_1
+  Okunan Sembol   : Y
+  Yazılacak Sembol: Y
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*YY=1100
+                          ^
+--------------------------------------------------
+Adım 50:
+  Mevcut Durum    : q_carpan_bul_1
+  Okunan Sembol   : Y
+  Yazılacak Sembol: Y
+  Sonraki Yön     : Sol (L)
+  Bant İçeriği    : 1000*YY=1100
+                         ^
+--------------------------------------------------
+Adım 51:
+  Mevcut Durum    : q_carpan_bul_1
+  Okunan Sembol   : *
+  Yazılacak Sembol: *
+  Sonraki Yön     : Sağ (R)
+  Bant İçeriği    : 1000*YY=1100
+                        ^
+  Açıklama        : Operand ayrımı (*) teyit edildi. Tüm bitler işlendi, çarpma tamamlandı (q_kabul).
+--------------------------------------------------
+--- SİMÜLASYON BİTTİ ---
+
+=======================================================
+                      SONUÇ EKRANI                     
+=======================================================
+  Binary Sonuç  : 1100
+  Decimal Sonuç : 12
+-------------------------------------------------------
+  Açıklama: 100₂ (4) × 11₂ (3) = 1100₂ (12)
+=======================================================
+
